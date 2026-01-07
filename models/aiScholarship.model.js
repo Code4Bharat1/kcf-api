@@ -1,172 +1,89 @@
 import mongoose from "mongoose";
+console.log("🔥 NEW AI SCHOLARSHIP SCHEMA LOADED 🔥");
 
 const aiScholarshipSchema = new mongoose.Schema(
   {
     /* ---------- Personal Information ---------- */
-    fullName: {
-      type: String,
-      required: true,
-      trim: true,
-    },
+    fullName: { type: String, required: true, trim: true },
+    dob: { type: Date, required: true },
+    gender: { type: String, enum: ["male", "female", "other"], required: true },
+    mobile: { type: String, required: true },
+    email: { type: String },
+    address: { type: String, required: true },
+    kokanRegion: { type: String, enum: ["yes", "no"], required: true },
+    hafizEQuran: { type: String, enum: ["yes", "no"], required: true },
 
-    dob: {
-      type: Date,
-      required: true,
-    },
-
-    gender: {
-      type: String,
-      enum: ["male", "female", "other"],
-      required: true,
-    },
-
-    mobile: {
-      type: String,
-      required: true,
-      match: /^[0-9+]{10,14}$/, // supports +91
-    },
-
-    email: {
-      type: String,
-      required: true,
-      lowercase: true,
-      trim: true,
-    },
-
-    address: {
-      type: String,
-      required: true,
-    },
-
-    kokanRegion: {
-      type: String,
-      enum: ["yes", "no"],
-      required: true,
-    },
-
-    /* ---------- Educational Details ---------- */
-    schoolName: {
-      type: String,
-      required: true,
-    },
-
-    board: {
+    /* ---------- 10th ---------- */
+    tenthSchoolName: { type: String, required: true },
+    tenthBoard: {
       type: String,
       enum: ["state", "cbse", "icse", "other"],
       required: true,
     },
+    tenthPercentage: { type: String, required: true },
 
-    currentStatus: {
+    /* ---------- 11th ---------- */
+    eleventhCollegeName: { type: String, required: true },
+    eleventhBoard: {
       type: String,
-      enum: ["passed11", "appearing12"],
+      enum: ["state", "cbse", "icse", "other"],
       required: true,
     },
+    eleventhStream: { type: String, required: true },
+    eleventhPercentage: { type: String, required: true },
 
-    stream: {
+    /* ---------- 12th ---------- */
+    twelfthCollegeName: { type: String, required: true },
+    twelfthBoard: {
       type: String,
-      enum: ["pcm", "pcb"],
+      enum: ["state", "cbse", "icse", "other"],
       required: true,
     },
+    twelfthStream: { type: String, required: true },
+    twelfthPercentage: { type: String, required: true },
 
-    percentage11: {
-      type: String,
-      required: true,
-    },
+    /* ---------- Career ---------- */
+    careerPath: { type: String, required: true },
+    motivation: { type: String, minlength: 100, required: true },
 
-    /* ---------- Career Interest ---------- */
-    careerPath: {
-      type: String,
-      enum: ["ai", "cybersecurity", "datascience"],
-      required: true,
-    },
+    /* ---------- Activities ---------- */
+    onlineCourses: Boolean,
+    codingPractice: Boolean,
+    workshops: Boolean,
+    noneButInterested: Boolean,
 
-    motivation: {
-      type: String,
-      required: true,
-      minlength: 100,
-      maxlength: 1500,
-    },
+    /* ---------- Family ---------- */
+    fatherName: { type: String, required: true },
+    fatherOccupation: { type: String, required: true },
+    fatherIncome: { type: String, required: true },
 
-    /* ---------- Background Activities ---------- */
-    onlineCourses: {
-      type: Boolean,
-      default: false,
-    },
+    motherName: { type: String, required: true },
+    motherOccupation: { type: String, required: true },
+    motherIncome: { type: String, required: true },
 
-    codingPractice: {
-      type: Boolean,
-      default: false,
-    },
-
-    workshops: {
-      type: Boolean,
-      default: false,
-    },
-
-    noneButInterested: {
-      type: Boolean,
-      default: false,
-    },
-
-    /* ---------- Family Background ---------- */
-    familyIncome: {
-      type: String,
-      enum: ["below2", "2-5", "5-10", "above10"],
-      required: true,
-    },
-
-    firstGraduate: {
-      type: String,
-      enum: ["yes", "no"],
-      required: true,
-    },
+    isOrphan: { type: String, enum: ["yes", "no"], required: true },
+    firstGraduate: { type: String, enum: ["yes", "no"], required: true },
 
     /* ---------- Counselling ---------- */
-    counsellingTime: {
-      type: String,
-      enum: ["morning", "afternoon", "evening"],
-      required: true,
-    },
-
-    counsellingLanguage: {
-      type: String,
-      enum: ["english", "hindi", "marathi"],
-      required: true,
-    },
+    counsellingTime: { type: String, required: true },
+    counsellingLanguage: { type: String, required: true },
+    mobileOwner: { type: String, required: true },
 
     /* ---------- Declarations ---------- */
-    declaration1: {
-      type: Boolean,
-      required: true,
-    },
-    declaration2: {
-      type: Boolean,
-      required: true,
-    },
-    declaration3: {
-      type: Boolean,
-      required: true,
-    },
-    declaration4: {
-      type: Boolean,
-      required: true,
-    },
+    declaration1: { type: Boolean, required: true },
+    declaration2: { type: Boolean, required: true },
+    declaration3: { type: Boolean, required: true },
+    declaration4: { type: Boolean, required: true },
 
-    /* ---------- Admin Workflow ---------- */
+    /* ---------- Admin ---------- */
     status: {
       type: String,
       enum: ["pending", "shortlisted", "selected", "rejected"],
       default: "pending",
     },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
-const AiScholarship = mongoose.model(
-  "AiScholarship",
-  aiScholarshipSchema
-);
-
-export default AiScholarship;
+export default mongoose.models.AiScholarship ||
+  mongoose.model("AiScholarship", aiScholarshipSchema);
