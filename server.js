@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static("uploads"));
 app.use(
   cors({
-    origin: ["http://localhost:3000","https://kokancommunityforum.org"],
+    origin: ["http://localhost:3000","https://kokancommunityforum.org","https://www.kokancommunityforum.org"],
     credentials: true,
   })
 );
