@@ -33,7 +33,7 @@ const aiScholarshipSchema = new mongoose.Schema(
     eleventhPercentage: { type: String, required: true },
 
     /* ---------- 12th ---------- */
-    twelfthCollegeName: { type: String, required: true },
+    // twelfthCollegeName: { type: String, required: true },
     twelfthBoard: {
       type: String,
       enum: ["state", "cbse", "icse", "other"],
@@ -59,12 +59,13 @@ const aiScholarshipSchema = new mongoose.Schema(
 
     motherName: { type: String, required: true },
     motherOccupation: { type: String, required: true },
-    motherIncome: { type: String, required: true },
+    motherIncome: { type: String},
 
-    isOrphan: { type: String, enum: ["yes", "no"], required: true },
+    // isOrphan: { type: String, enum: ["yes", "no"], required: true },
     firstGraduate: { type: String, enum: ["yes", "no"], required: true },
 
     /* ---------- Counselling ---------- */
+    counsellingMobile:{ type: String, required: true },
     counsellingTime: { type: String, required: true },
     counsellingLanguage: { type: String, required: true },
     mobileOwner: { type: String, required: true },
