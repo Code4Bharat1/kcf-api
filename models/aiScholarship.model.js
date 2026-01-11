@@ -6,7 +6,7 @@ const aiScholarshipSchema = new mongoose.Schema(
     /* ---------- Personal Information ---------- */
     fullName: { type: String, required: true, trim: true },
     dob: { type: Date, required: true },
-    gender: { type: String, enum: ["male", "female", "other"], required: true },
+    gender: { type: String, enum: ["male", "female"], required: true },
     mobile: { type: String, required: true },
     email: { type: String },
     address: { type: String, required: true },
