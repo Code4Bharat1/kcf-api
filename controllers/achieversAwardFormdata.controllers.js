@@ -6,6 +6,15 @@ const achieversAward = async (req, res) => {
     console.log("Body:", req.body);
     console.log("Files:", req.files);
 
+
+    const data = await AchieversAward.findOne({ email: req.body.email });
+    if (data) {
+      return res.status(409).json({
+        success: false,
+        message: "An application with this email already exists.",
+      });
+    }
+
     // 1️⃣ Extract Aadhaar image paths
     const aadhaarImages =
       req.files?.map((file) => `/uploads/${file.filename}`) || [];

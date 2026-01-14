@@ -7,6 +7,14 @@ const aiScholarshipController = async (req, res) => {
 
     const body = req.body;
 
+    const data = await AiScholarship.findOne({ email: body.email });
+    if (data) {
+      return res.status(409).json({
+        success: false,
+        message: "An application with this email already exists.",
+      });
+    }
+
     /* ======================================================
        ✅ FRONTEND → BACKEND FIELD MAPPING (CRITICAL FIX)
        This makes frontend + postman BOTH work
