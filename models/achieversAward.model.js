@@ -38,13 +38,13 @@ const achieversAwardSchema = new mongoose.Schema(
     },
     nativeAddress: {
       type: String,
-      required: true,
+
     },
 
     /* ---------- Aadhaar (SECURE) ---------- */
     aadhaar: {
       type: String,
-      required: true,
+
       // Example: XXXX-XXXX-1234
     },
 
@@ -57,18 +57,12 @@ const achieversAwardSchema = new mongoose.Schema(
     /* ---------- Education ---------- */
     education: {
       ssc: {
-        score: { type: String, required: true },
-        year: {
-          type: Number,
-          required: true,
-        },
+        score: { type: String },
+        year: { type: Number },
       },
       hsc: {
-        score: { type: String, required: true },
-        year: {
-          type: Number,
-          required: true,
-        },
+        score: { type: String },
+        year: { type: Number },
       },
       graduation: {
         degree: { type: String },
@@ -79,6 +73,7 @@ const achieversAwardSchema = new mongoose.Schema(
         year: { type: Number },
       },
     },
+
 
     /* ---------- Awards ---------- */
     awardsReceived: {

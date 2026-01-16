@@ -16,8 +16,10 @@ const achieversAward = async (req, res) => {
     }
 
     // 1️⃣ Extract Aadhaar image paths
-    const aadhaarImages =
-      req.files?.map((file) => `/uploads/${file.filename}`) || [];
+    const aadhaarImages = Array.isArray(req.files)
+  ? req.files.map((file) => `/uploads/${file.filename}`)
+  : [];
+
 
     // 2️⃣ Create DB document (MATCHING SCHEMA)
     const achieverData = await AchieversAward.create({
@@ -30,10 +32,11 @@ const achieversAward = async (req, res) => {
 
       // Address
       currentAddress: req.body.currentAddress,
-      nativeAddress: req.body.nativeAddress,
+      nativeAddress: req.body.nativeAddress || "",
 
       // Aadhaar
-      aadhaar: req.body.aadhaarNumber, // frontend sends aadhaarNumber
+      aadhaar: req.body.aadhaarNumber || null,
+ // frontend sends aadhaarNumber
 
       aadhaarImages,
 
@@ -41,12 +44,14 @@ const achieversAward = async (req, res) => {
       education: {
         ssc: {
           score: req.body.sscScore,
-          year: Number(req.body.sscYear),
+          year: req.body.sscYear ? Number(req.body.sscYear) : null,
+
         },
         hsc: {
-          score: req.body.hscScore,
-          year: Number(req.body.hscYear),
-        },
+  score: req.body.hscScore,
+  year: req.body.hscYear ? Number(req.body.hscYear) : null,
+},
+
         graduation: {
           degree: req.body.graduation || "",
           year: req.body.graduationYear
