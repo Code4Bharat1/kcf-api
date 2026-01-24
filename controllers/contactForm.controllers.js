@@ -27,7 +27,7 @@ console.log("PASS LENGTH:", process.env.ADMIN_EMAIL_PASS?.length);
     // 3️⃣ Send mail (sender = receiver, replyTo = user)
     await transporter.sendMail({
       from: `"Kokan Community Forum" <${process.env.ADMIN_EMAIL}>`,
-      to: process.env.ADMIN_EMAIL,
+      to: process.env.CLIENT_EMAIL,
       replyTo: email, // 👈 USER EMAIL
       subject: `New Contact Form: ${subject}`,
       html: `
